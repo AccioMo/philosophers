@@ -6,24 +6,31 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/04 21:23:55 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/05 19:37:48 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*ft_philosophy(void *uni)
+void	*ft_philosophy(void *arg)
 {
-	struct timeval	start;
+	struct timeval	counter;
 	struct timeval	end;
-	int				i;
+	struct timeval	start;
+	double			time_to_die;
+	long			i;
+	t_universe		*uni;
 
 	i = 0;
+	uni = (t_universe *)arg;
 	gettimeofday(&start, NULL);
-	while (i < 1000)
-		i++;
+	gettimeofday(&counter, NULL);
+	time_to_die = (counter.tv_sec * 1000.0 + counter.tv_usec / 1000.0) + uni->time_to_die;
+	printf("time_to_die: %f ms\n", time_to_die - (counter.tv_sec * 1000.0 + counter.tv_usec / 1000.0));
+	while ((counter.tv_sec * 1000.0 + counter.tv_usec / 1000.0) <= time_to_die)
+		gettimeofday(&counter, NULL);
 	gettimeofday(&end, NULL);
-	printf("lifespan: %f\n", start.tv_usec - end.tv_usec);
+	printf("lifespan: %f ms\n", (end.tv_sec * 1000.0 + end.tv_usec / 1000.0) - (start.tv_sec * 1000.0 + start.tv_usec / 1000.0));
 	pthread_exit(NULL);
 }
 
