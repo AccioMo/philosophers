@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/05 19:22:45 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/07 22:46:53 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,19 @@ void	ft_input_check(int argc)
 
 int	main(int argc, char *argv[])
 {
-	t_universe	uni;
+	t_env	env;
 
 	ft_input_check(argc);
-	uni.pop = ft_atoi(argv[1]);
-	uni.time_to_die = ft_atoi(argv[2]);
-	uni.time_to_eat = ft_atoi(argv[3]);
-	uni.time_to_sleep = ft_atoi(argv[4]);
+	env.pop = ft_atoi(argv[1]);
+	env.time_to_die = ft_atoi(argv[2]);
+	env.time_to_eat = ft_atoi(argv[3]);
+	env.time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		uni.meals_to_go = ft_atoi(argv[5]);
+		env.meals_to_go = ft_atoi(argv[5]);
 	else
-		uni.meals_to_go = -1;
-	ft_create_threads(&uni);
-	printf("Done\n");
+		env.meals_to_go = -1;
+	env.start = ft_get_time();
+	ft_create_threads(&env);
+	ft_printf("Done\n");
 	return (0);
 }

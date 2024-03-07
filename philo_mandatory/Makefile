@@ -2,6 +2,8 @@ CC = cc
 # FLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ../libft/
 LIBFT = ../libft/libft.a
+PRINTF_DIR = ../ft_printf/
+PRINTF = ../ft_printf/libftprintf.a
 
 NAME = philo_mandatory
 SRC_DIR = src/
@@ -26,11 +28,14 @@ BLUE = \033[0;34m
 BOLD = \033[1m
 RESET = \033[0m
 
-.PHONY: all $(LIBFT) $(OBJ_DIR) bonus clean fclean re
+.PHONY: all $(LIBFT) $(PRINTF) $(OBJ_DIR) bonus clean fclean re
 
-all: $(LIBFT) $(OBJ_DIR) $(NAME)
+all: $(LIBFT) $(PRINTF) $(OBJ_DIR) $(NAME)
 
 $(LIBFT): $(LIBFT_DIR)
+	@make -C $<
+
+$(PRINTF): $(PRINTF_DIR)
 	@make -C $<
 
 $(OBJ_DIR):
@@ -38,7 +43,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ)
 	@echo "$(BLUE)$(BOLD)Creating $(NAME) executable...$(RESET)"
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
 	@echo "$(GREEN)$(BOLD)$(NAME) created$(RESET)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
