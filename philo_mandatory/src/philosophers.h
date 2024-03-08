@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/07 22:46:47 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/08 23:43:04 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ typedef struct s_env
 	int				time_to_die;
 	int				meals_to_go;
 	double			start;
+	int				dead;
 	int				*forks;
 	pthread_t		*pids;
 	pthread_mutex_t	*lock;
+	pthread_mutex_t	*dead_lock;
 }	t_env;
 
 typedef struct s_philosopher

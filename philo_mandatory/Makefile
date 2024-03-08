@@ -1,5 +1,5 @@
 CC = cc
-# FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread
 LIBFT_DIR = ../libft/
 LIBFT = ../libft/libft.a
 PRINTF_DIR = ../ft_printf/

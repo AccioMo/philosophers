@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/07 22:46:53 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/08 23:43:11 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char *argv[])
 	else
 		env.meals_to_go = -1;
 	env.start = ft_get_time();
+	env.dead = 0;
 	ft_create_threads(&env);
 	ft_printf("Done\n");
 	return (0);
