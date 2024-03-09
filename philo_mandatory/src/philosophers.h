@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/08 23:43:04 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/09 18:06:35 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ typedef struct s_env
 	int				dead;
 	int				*forks;
 	pthread_t		*pids;
-	pthread_mutex_t	*lock;
+	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	*dead_lock;
+	pthread_mutex_t	*print_lock;
 }	t_env;
 
 typedef struct s_philosopher
 {
 	int		id;
 	int		thinking;
+	int		meals;
 	double	last_meal;
 	t_env	*env;
 }	t_philosopher;

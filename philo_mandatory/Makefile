@@ -5,7 +5,7 @@ LIBFT = ../libft/libft.a
 PRINTF_DIR = ../ft_printf/
 PRINTF = ../ft_printf/libftprintf.a
 
-NAME = philo_mandatory
+NAME = philo
 SRC_DIR = src/
 OBJ_DIR = obj/
 HEADER = $(SRC_DIR)philosophers.h

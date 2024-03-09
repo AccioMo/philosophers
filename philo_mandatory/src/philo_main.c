@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/08 23:43:11 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/09 19:02:46 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_input_check(int argc)
 	if (argc != 5 && argc != 6)
 	{
 		ft_putstr_fd("usage: ./philo_mandatory number_of_philosophers \
-					time_to_die time_to_eat time_to_sleep \
-					[number_of_times_each_philosopher_must_eat]", 2);
+time_to_die time_to_eat time_to_sleep \
+[number_of_times_each_philosopher_must_eat]\n", 2);
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -39,6 +39,5 @@ int	main(int argc, char *argv[])
 	env.start = ft_get_time();
 	env.dead = 0;
 	ft_create_threads(&env);
-	ft_printf("Done\n");
 	return (0);
 }
