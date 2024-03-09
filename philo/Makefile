@@ -1,9 +1,9 @@
 CC = cc
 FLAGS = -Wall -Wextra -Werror -fsanitize=thread
 LIBFT_DIR = ../libft/
-LIBFT = ../libft/libft.a
+LIBFT = $(LIBFT_DIR)libft.a
 PRINTF_DIR = ../ft_printf/
-PRINTF = ../ft_printf/libftprintf.a
+PRINTF = $(PRINTF_DIR)libftprintf.a
 
 NAME = philo
 SRC_DIR = src/
@@ -14,8 +14,8 @@ SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
 BONUS = philo_bonus
-BONUS_SRC_DIR = src/
-BONUS_OBJ_DIR = obj/
+BONUS_SRC_DIR = philo_bonus/src/
+BONUS_OBJ_DIR = philo_bonus/obj/
 BONUS_HEADER = $(BONUS_SRC_DIR)philosophers_bonus.h
 BONUS_FILES = 
 BONUS_SRC = $(addprefix $(BONUS_SRC_DIR), $(BONUS_FILES))

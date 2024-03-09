@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/09 19:03:59 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/09 19:15:51 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ void	ft_sleep(t_philosopher *philo)
 	if (philo->meals == philo->env->meals_to_go)
 		return ;
 	ft_print_action(philo, "is sleeping");
-	// pthread_mutex_unlock(philo->env->lock);
 	ft_usleep(philo->env->time_to_sleep);
-	// pthread_mutex_lock(philo->env->lock);
 }
 
 void	ft_eat(t_philosopher *philo)
@@ -61,14 +59,11 @@ void	ft_eat(t_philosopher *philo)
 	ft_print_action(philo, "is eating");
 	philo->last_meal = ft_get_time();
 	philo->meals++;
-	// pthread_mutex_unlock(philo->env->lock);
 	ft_usleep(philo->env->time_to_eat);
-	// pthread_mutex_lock(philo->env->lock);
 }
 
 void	ft_live(t_philosopher *philo)
 {
-	// int	*forks;
 	int	right;
 	int	fork_left;
 	int	fork_right;
@@ -97,7 +92,6 @@ void	ft_live(t_philosopher *philo)
 		ft_print_action(philo, "is thinking");
 		philo->thinking = 1;
 	}
-	// pthread_mutex_unlock(philo->env->lock);
 }
 
 int	ft_exists(t_philosopher *philo)
@@ -178,5 +172,10 @@ int	ft_create_threads(t_env *env)
 		pthread_join(env->pids[i++], NULL);
 	pthread_mutex_destroy(env->fork_lock);
 	pthread_mutex_destroy(env->dead_lock);
+	free(env->fork_lock);
+	free(env->dead_lock);
+	free(philo);
+	free(env->forks);
+	free(env->pids);
 	return (0);
 }

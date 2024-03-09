@@ -6,13 +6,13 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/09 19:02:46 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/09 19:42:57 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_input_check(int argc)
+void	ft_arg_check(int argc)
 {
 	if (argc != 5 && argc != 6)
 	{
@@ -23,21 +23,49 @@ time_to_die time_to_eat time_to_sleep \
 	}
 }
 
+int	ft_input_check(int argc, char *argv[], t_env *env)
+{
+	env->pop = ft_atoi(argv[1]);
+	if (env->pop < 0)
+		return (1);
+	env->time_to_die = ft_atoi(argv[2]);
+	if (env->time_to_die < 0)
+		return (1);
+	env->time_to_eat = ft_atoi(argv[3]);
+	if (env->time_to_eat < 0)
+		return (1);
+	env->time_to_sleep = ft_atoi(argv[4]);
+	if (env->time_to_sleep < 0)
+		return (1);
+	if (argc == 6)
+	{
+		env->meals_to_go = ft_atoi(argv[5]);
+		if (env->meals_to_go < 0)
+			return (1);
+	}
+	else
+		env->meals_to_go = -1;
+	env->start = ft_get_time();
+	env->dead = 0;
+	return (0);
+}
+
+void	f()
+{
+	system("leaks philo");
+}
+
 int	main(int argc, char *argv[])
 {
 	t_env	env;
 
-	ft_input_check(argc);
-	env.pop = ft_atoi(argv[1]);
-	env.time_to_die = ft_atoi(argv[2]);
-	env.time_to_eat = ft_atoi(argv[3]);
-	env.time_to_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		env.meals_to_go = ft_atoi(argv[5]);
-	else
-		env.meals_to_go = -1;
-	env.start = ft_get_time();
-	env.dead = 0;
+	ft_arg_check(argc);
+	if (ft_input_check(argc, argv, &env) != 0)
+	{
+		ft_putstr_fd("error: input must be positive\n", 2);
+		return (1);
+	}
 	ft_create_threads(&env);
+	atexit(f);
 	return (0);
 }
