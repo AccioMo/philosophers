@@ -6,11 +6,12 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/09 21:34:50 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/10 19:24:09 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <math.h>
 
 double	ft_get_time(void)
 {
@@ -109,7 +110,7 @@ void	*ft_philosophy(void *arg)
 
 	philo = (t_philosopher *)arg;
 	philo->last_meal = ft_get_time();
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 == 0 || philo->id == philo->env->pop)
 		ft_print_action(philo, "is thinking");
 	while (ft_exists(philo))
 	{
@@ -117,7 +118,7 @@ void	*ft_philosophy(void *arg)
 	}
 	if (philo->meals != philo->env->meals_to_go)
 	{	
-		ft_print_action(philo, "is dead");
+		ft_print_action(philo, "died");
 		pthread_mutex_lock(philo->env->dead_lock);
 		philo->env->dead = 1;
 		pthread_mutex_unlock(philo->env->dead_lock);
