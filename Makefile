@@ -1,23 +1,23 @@
 CC = cc
 FLAGS = -Wall -Wextra -Werror -fsanitize=thread
-LIBFT_DIR = ../libft/
+LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
-PRINTF_DIR = ../ft_printf/
+PRINTF_DIR = ft_printf/
 PRINTF = $(PRINTF_DIR)libftprintf.a
 
-NAME = philo
-SRC_DIR = src/
-OBJ_DIR = obj/
+NAME = philosophers
+SRC_DIR = philo/src/
+OBJ_DIR = philo/obj/
 HEADER = $(SRC_DIR)philosophers.h
-FILES = philo_main.c philo_create.c 
+FILES = main.c create.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
-BONUS = philo_bonus
+BONUS = philosophers_bonus
 BONUS_SRC_DIR = philo_bonus/src/
 BONUS_OBJ_DIR = philo_bonus/obj/
 BONUS_HEADER = $(BONUS_SRC_DIR)philosophers_bonus.h
-BONUS_FILES = 
+BONUS_FILES = main_bonus.c create_bonus.c
 BONUS_SRC = $(addprefix $(BONUS_SRC_DIR), $(BONUS_FILES))
 BONUS_OBJ = $(addprefix $(BONUS_OBJ_DIR), $(BONUS_FILES:.c=.o))
 
@@ -51,6 +51,9 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
 bonus: $(LIBFT) $(BONUS_OBJ_DIR) $(BONUS)
+
+$(BONUS_OBJ_DIR):
+	mkdir -p $(BONUS_OBJ_DIR)
 
 $(BONUS): $(BONUS_OBJ)
 	@echo "$(BLUE)$(BOLD)Creating $(BONUS) executable...$(RESET)"

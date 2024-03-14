@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_main.c                                       :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/09 20:34:00 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/14 02:05:53 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philosophers_bonus.h"
 
 void	ft_arg_check(int argc)
 {
@@ -46,7 +46,6 @@ int	ft_input_check(int argc, char *argv[], t_env *env)
 	else
 		env->meals_to_go = -1;
 	env->start = ft_get_time();
-	env->dead = 0;
 	return (0);
 }
 
