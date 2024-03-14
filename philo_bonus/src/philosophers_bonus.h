@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/14 03:20:00 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/14 21:51:45 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include "../../libft/libft.h"
 
+/*			general struct			*/
 typedef struct s_env
 {
 	int				pop;
@@ -35,6 +36,7 @@ typedef struct s_env
 	sem_t			*forks_lock;
 }	t_env;
 
+/*			philosopher struct			*/
 typedef struct s_philosopher
 {
 	int		id;
@@ -42,7 +44,25 @@ typedef struct s_philosopher
 	double	last_meal;
 }	t_philosopher;
 
+/*			functions_bonus			*/
+void	ft_arg_check(int argc);
+int		ft_input_check(int argc, char *argv[], t_env *env);
+int		ft_start(t_env *env);
+void	ft_clear(t_env *env);
+
+/*			create_bonus			*/
+int		ft_create_watcher(t_env *env);
+int		ft_create_philosophers(t_env *env);
+
+/*			actions_bonus			*/
+void	ft_sleep(t_philosopher *philo, t_env *env);
+void	ft_eat(t_philosopher *philo, t_env *env);
+void	ft_think(t_philosopher *philo, t_env *env);
+void	ft_print_action(t_philosopher *philo, t_env *env, char *action);
+int		ft_exists(t_philosopher *philo, t_env *env);
+
+/*			utils_bonus				*/
 double	ft_get_time(void);
-int		ft_create_threads(t_env *env);
+void	ft_usleep(int ms);
 
 #endif
