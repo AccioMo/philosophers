@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 07:16:19 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 23:08:59 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int	main(int argc, char *argv[])
 		return (-1);
 	if (ft_init_mutexes(&env) < 0)
 	{
-		free(env.dead_lock);
+		free(env.lock);
 		free(env.forks);
 		free(env.pids);
 		return (-1);
 	}
 	philo = ft_create_philosophers(&env);
 	if (!philo)
-		ft_clear(&env, philo);
+		ft_clear(philo);
 	while (i < env.pop)
 		pthread_join(env.pids[i++], NULL);
-	ft_clear(&env, philo);
+	ft_clear(philo);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:36:02 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 06:59:46 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 23:23:11 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,10 @@ void	ft_eat(t_philosopher *philo, t_env *env)
 {
 	if (env->pop == 1)
 		return ;
+	philo->thinking = 0;
 	sem_wait(env->forks_lock);
 	ft_print_action(philo, env, "has taken a fork");
-	if (!ft_exists(philo, env))
-	{
-		sem_post(env->forks_lock);
-		ft_die(philo, env);
-	}
-	philo->thinking = 0;
+	ft_exists(philo, env);
 	sem_wait(env->forks_lock);
 	ft_print_action(philo, env, "has taken a fork");
 	ft_print_action(philo, env, "is eating");

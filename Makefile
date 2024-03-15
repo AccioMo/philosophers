@@ -4,17 +4,19 @@ LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 LPTHREAD = -lpthread
 
-NAME = philosophers
-SRC_DIR = philo/src/
-OBJ_DIR = philo/obj/
+MAN_DIR = philo/
+NAME = $(MAN_DIR)philo
+SRC_DIR = $(MAN_DIR)src/
+OBJ_DIR = $(MAN_DIR)obj/
 HEADER = $(SRC_DIR)philosophers.h
 FILES = actions.c create.c functions.c main.c utils.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
-BONUS = philosophers_bonus
-BONUS_SRC_DIR = philo_bonus/src/
-BONUS_OBJ_DIR = philo_bonus/obj/
+BONUS_DIR = philo_bonus/
+BONUS = $(BONUS_DIR)philo_bonus
+BONUS_SRC_DIR = $(BONUS_DIR)src/
+BONUS_OBJ_DIR = $(BONUS_DIR)obj/
 BONUS_HEADER = $(BONUS_SRC_DIR)philosophers_bonus.h
 BONUS_FILES = actions_bonus.c create_bonus.c functions_bonus.c main_bonus.c utils_bonus.c
 BONUS_SRC = $(addprefix $(BONUS_SRC_DIR), $(BONUS_FILES))
@@ -42,7 +44,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ)
 	@echo "$(BLUE)$(BOLD)Creating $(NAME) executable...$(RESET)"
-	@$(CC) $(FLAGS) $(OBJ) $(LPTHREAD) $(LIBFT) $(PRINTF) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) $(LPTHREAD) $(LIBFT) $(PRINTF) -o $() $(NAME)
 	@echo "$(GREEN)$(BOLD)$(NAME) created$(RESET)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)

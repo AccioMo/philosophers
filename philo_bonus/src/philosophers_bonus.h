@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 06:38:45 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 23:17:58 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_philosopher
 }	t_philosopher;
 
 /*			functions_bonus			*/
-void	ft_arg_check(int argc);
+void	ft_arg_check(int argc, char *argv[], t_env *env);
 int		ft_input_check(int argc, char *argv[], t_env *env);
 int		ft_start(t_env *env);
 void	ft_clear(t_env *env);
