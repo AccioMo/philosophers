@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/14 21:49:45 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 01:42:40 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,17 @@ static int	ft_philosophy(void *arg, int i)
 	philo.id = i;
 	philo.meals = 0;
 	if (philo.id % 2 == 0 || philo.id == env->pop)
-		ft_print_action(&philo, env, "is thinking");
+		ft_think(&philo, env);
 	while (ft_exists(&philo, env))
 	{
 		ft_eat(&philo, env);
 		ft_sleep(&philo, env);
+		if (!ft_exists(&philo, env))
+			break ;
 		ft_think(&philo, env);
 	}
 	if (philo.meals != env->meals_to_go)
-	{
-		ft_print_action(&philo, env, "died");
-		sem_wait(env->lock);
-		exit(9);
-	}
+		ft_die(&philo, env);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/14 21:51:45 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 02:04:25 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,18 @@ void	ft_clear(t_env *env);
 /*			create_bonus			*/
 int		ft_create_watcher(t_env *env);
 int		ft_create_philosophers(t_env *env);
+int		ft_exists(t_philosopher *philo, t_env *env);
 
 /*			actions_bonus			*/
-void	ft_sleep(t_philosopher *philo, t_env *env);
 void	ft_eat(t_philosopher *philo, t_env *env);
+void	ft_sleep(t_philosopher *philo, t_env *env);
 void	ft_think(t_philosopher *philo, t_env *env);
 void	ft_print_action(t_philosopher *philo, t_env *env, char *action);
-int		ft_exists(t_philosopher *philo, t_env *env);
+void	ft_die(t_philosopher *philo, t_env *env);
 
 /*			utils_bonus				*/
 double	ft_get_time(void);
 void	ft_usleep(int ms);
+long	ft_round(double nb);
 
 #endif

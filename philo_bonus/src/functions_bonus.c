@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:46:54 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/14 21:47:45 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 02:07:39 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_arg_check(int argc)
 {
 	if (argc != 5 && argc != 6)
 	{
-		ft_putstr_fd("usage: ./philo_mandatory number_of_philosophers \
+		ft_putstr_fd("usage: ./philosophers_bonus number_of_philosophers \
 time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosopher_must_eat]\n", 2);
 		exit(EXIT_SUCCESS);
@@ -57,6 +57,20 @@ int	ft_start(t_env *env)
 	sem_unlink("/death_lock");
 	env->forks_lock = sem_open("/fork_lock", O_CREAT, S_IRWXU, env->pop);
 	env->lock = sem_open("/death_lock", O_CREAT, S_IRWXU, 1);
+	return (0);
+}
+
+int	ft_exists(t_philosopher *philo, t_env *env)
+{
+	long	current;
+	long	deadline;
+	int		hungry;
+
+	current = ft_round(ft_get_time());
+	deadline = ft_round(philo->last_meal + env->time_to_die);
+	hungry = philo->meals < env->meals_to_go;
+	if (current < deadline && (env->meals_to_go < 0 || hungry))
+		return (1);
 	return (0);
 }
 
