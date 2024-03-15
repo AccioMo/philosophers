@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 02:04:25 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 06:38:45 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_philosopher
 {
 	int		id;
 	int		meals;
+	int		thinking;
 	double	last_meal;
 }	t_philosopher;
 

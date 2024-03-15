@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 02:04:21 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 07:12:06 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_clear(t_env *env, void *philo);
 int		ft_allocate(t_env *env);
 int		ft_init_mutexes(t_env *env);
 void	*ft_create_philosophers(t_env *env);
-int		ft_exists(t_philosopher *philo);
+int		ft_breathing(t_philosopher *philo);
 
 /*			actions_bonus			*/
 void	ft_eat(t_philosopher *philo);

@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:36:36 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 02:04:14 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 06:31:59 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 long	ft_round(double nb)
 {
-	return ((long)(nb + 0.5));
+	nb = nb + 0.5;
+	return ((long)nb);
 }
 
 double	ft_get_time(void)

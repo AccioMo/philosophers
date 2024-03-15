@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:46:54 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 02:07:39 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 07:01:57 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ int	ft_exists(t_philosopher *philo, t_env *env)
 	int		hungry;
 
 	current = ft_round(ft_get_time());
-	deadline = ft_round(philo->last_meal + env->time_to_die);
+	deadline = ft_round(philo->last_meal) + ft_round(env->time_to_die);
 	hungry = philo->meals < env->meals_to_go;
 	if (current < deadline && (env->meals_to_go < 0 || hungry))
 		return (1);
+	if (philo->meals != env->meals_to_go)
+		ft_die(philo, env);
 	return (0);
 }
 

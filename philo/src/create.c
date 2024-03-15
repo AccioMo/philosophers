@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 02:08:10 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/15 07:12:06 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@ static void	*ft_philosophy(void *arg)
 	philo = (t_philosopher *)arg;
 	philo->last_meal = ft_get_time();
 	if (philo->id % 2 == 0 || philo->id == philo->env->pop)
+	{
+		ft_usleep(1 + philo->id / 25);
 		ft_think(philo);
-	while (ft_exists(philo))
+	}
+	while (ft_breathing(philo))
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
-		if (!ft_exists(philo))
+		if (!ft_breathing(philo))
 			break ;
 		ft_think(philo);
 	}
-	if (philo->meals != philo->env->meals_to_go)
-		ft_die(philo);
 	pthread_exit(NULL);
 }
 
-int	ft_exists(t_philosopher *philo)
+int	ft_breathing(t_philosopher *philo)
 {
 	long	current;
 	long	ddl;
@@ -44,10 +45,12 @@ int	ft_exists(t_philosopher *philo)
 	dead = philo->env->dead;
 	pthread_mutex_unlock(philo->env->dead_lock);
 	current = ft_round(ft_get_time());
-	ddl = ft_round(philo->last_meal + philo->env->time_to_die);
+	ddl = ft_round(philo->last_meal) + ft_round(philo->env->time_to_die);
 	hungry = philo->meals < philo->env->meals_to_go;
 	if (!dead && current < ddl && (philo->env->meals_to_go < 0 || hungry))
 		return (1);
+	if (philo->meals != philo->env->meals_to_go)
+		ft_die(philo);
 	return (0);
 }
 
