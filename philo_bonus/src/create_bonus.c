@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 23:17:21 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/16 01:25:01 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,22 @@ static int	ft_philosophy(void *arg, int i)
 	t_env			*env;
 
 	env = (t_env *)arg;
-	philo.last_meal = ft_get_time();
 	philo.id = i;
-	philo.meals = 0;
 	philo.thinking = 0;
+	philo.env = env;
+	sem_wait(env->lock);
+	philo.last_meal = ft_get_time();
+	philo.meals = 0;
+	sem_post(env->lock);
+	ft_create_watcher_thread(&philo);
 	if (philo.id % 2 == 0 || philo.id == env->pop)
 		ft_think(&philo, env);
-	while (ft_exists(&philo, env))
+	while (1)
 	{
 		ft_eat(&philo, env);
 		ft_sleep(&philo, env);
-		if (!ft_exists(&philo, env))
-			break ;
 		ft_think(&philo, env);
 	}
-	exit(0);
 }
 
 static void	ft_genocide(t_env *env)

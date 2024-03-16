@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 22:50:57 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/16 01:26:01 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ static void	*ft_philosophy(void *arg)
 		ft_usleep(1 + philo->id / 25, philo->env);
 		ft_think(philo);
 	}
-	while (ft_breathing(philo))
+	while (1)
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
-		if (!ft_breathing(philo))
-			break ;
 		ft_think(philo);
 	}
 	return (NULL);

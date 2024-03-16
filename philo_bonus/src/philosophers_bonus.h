@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 23:17:58 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/16 00:53:41 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philosopher
 	int		meals;
 	int		thinking;
 	double	last_meal;
+	t_env	*env;
 }	t_philosopher;
 
 /*			functions_bonus			*/
@@ -67,5 +68,6 @@ void	ft_die(t_philosopher *philo, t_env *env);
 double	ft_get_time(void);
 void	ft_usleep(int ms);
 long	ft_round(double nb);
+void	ft_create_watcher_thread(t_philosopher *philo);
 
 #endif
