@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:46:54 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/16 01:26:57 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/16 01:32:58 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ static int	ft_input_check(int argc, char *argv[], t_env *env)
 	return (0);
 }
 
-void	ft_arg_check(int argc, char *argv[], t_env *env)
+int	ft_arg_check(int argc, char *argv[], t_env *env)
 {
 	if (argc != 5 && argc != 6)
 	{
 		ft_putstr_fd("usage: ./philo_mandatory number_of_philosophers \
 time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosopher_must_eat]\n", 2);
-		exit(EXIT_SUCCESS);
+		return (EXIT_FAILURE);
 	}
 	if (ft_input_check(argc, argv, env) != 0)
 	{
 		ft_putstr_fd("Error: Input must be greater than 0.\n", 2);
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 }
 

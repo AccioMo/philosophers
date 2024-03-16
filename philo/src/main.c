@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 23:08:59 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/16 01:32:47 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(int argc, char *argv[])
 	int		i;
 
 	i = 0;
-	ft_arg_check(argc, argv, &env);
+	if (ft_arg_check(argc, argv, &env))
+		return (EXIT_FAILURE);
 	if (ft_allocate(&env) < 0)
 		return (-1);
 	if (ft_init_mutexes(&env) < 0)
