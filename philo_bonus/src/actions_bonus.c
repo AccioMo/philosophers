@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:36:02 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/16 01:24:59 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/17 22:45:55 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	ft_print_action(t_philosopher *philo, t_env *env, char *action)
 	long	timestamp;
 
 	timestamp = ft_round(ft_get_time()) - ft_round(env->start);
-	sem_wait(env->lock);
+	sem_wait(env->print_lock);
 	printf("%ld %d %s\n", timestamp, philo->id, action);
 	if (ft_strncmp(action, "died", 4))
-		sem_post(env->lock);
+		sem_post(env->print_lock);
 }

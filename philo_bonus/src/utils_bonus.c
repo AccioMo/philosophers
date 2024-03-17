@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:36:36 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/16 01:22:45 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/17 22:57:25 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,22 @@ void	ft_usleep(int ms)
 void	*ft_watch(void *arg)
 {
 	t_philosopher	*philo;
-	long			current;
+	int				full;
 	long			ddl;
-	int				meals;
 
 	philo = (t_philosopher *)arg;
-	while (1)
+	while (1337)
 	{
-		current = ft_round(ft_get_time());
 		sem_wait(philo->env->lock);
-		meals = philo->meals;
+		full = philo->env->full;
 		ddl = ft_round(philo->last_meal) + ft_round(philo->env->time_to_die);
 		sem_post(philo->env->lock);
-		if (current >= ddl)
+		if (ft_round(ft_get_time()) >= ddl)
 		{
 			ft_print_action(philo, philo->env, "died");
 			exit(9);
 		}
-		if (meals == philo->env->meals_to_go)
+		if (full)
 			exit(0);
 	}
-}
-
-void	ft_create_watcher_thread(t_philosopher *philo)
-{
-	pthread_t	watcher;
-
-	if (pthread_create(&watcher, NULL, ft_watch, (void *)philo) < 0)
-		return ;
-	if (pthread_detach(watcher) < 0)
-		return ;
 }

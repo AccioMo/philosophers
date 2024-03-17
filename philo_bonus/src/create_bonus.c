@@ -6,34 +6,39 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/16 01:25:01 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/17 22:58:50 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-static int	ft_philosophy(void *arg, int i)
+static void	ft_philosophy(void *arg, int i)
 {
 	t_philosopher	philo;
+	pthread_t		watcher;
 	t_env			*env;
 
 	env = (t_env *)arg;
 	philo.id = i;
 	philo.thinking = 0;
 	philo.env = env;
-	sem_wait(env->lock);
 	philo.last_meal = ft_get_time();
 	philo.meals = 0;
-	sem_post(env->lock);
-	ft_create_watcher_thread(&philo);
+	if (pthread_create(&watcher, NULL, ft_watch, (void *)&philo) < 0)
+		return ;
 	if (philo.id % 2 == 0 || philo.id == env->pop)
 		ft_think(&philo, env);
-	while (1)
+	while (ft_hungry(&philo, env))
 	{
 		ft_eat(&philo, env);
 		ft_sleep(&philo, env);
 		ft_think(&philo, env);
 	}
+	sem_wait(env->lock);
+	env->full = 1;
+	sem_post(env->lock);
+	pthread_join(watcher, NULL);
+	exit(0);
 }
 
 static void	ft_genocide(t_env *env)
@@ -48,7 +53,7 @@ static void	ft_genocide(t_env *env)
 	}
 }
 
-static void	*ft_watch(void *arg)
+static void	*ft_monitor(void *arg)
 {
 	t_env	*env;
 	int		status;
@@ -59,7 +64,8 @@ static void	*ft_watch(void *arg)
 	while (i++ < env->pop)
 	{
 		waitpid(-1, &status, 0);
-		if (status >> 8 == 9)
+		status >>= 8;
+		if (status == 9)
 		{
 			ft_genocide(env);
 			sem_post(env->lock);
@@ -69,11 +75,11 @@ static void	*ft_watch(void *arg)
 	return (NULL);
 }
 
-int	ft_create_watcher(t_env *env)
+int	ft_create_monitor(t_env *env)
 {
 	pthread_t	monitor;
 
-	if (pthread_create(&monitor, NULL, ft_watch, env) < 0)
+	if (pthread_create(&monitor, NULL, ft_monitor, env) < 0)
 		return (-1);
 	if (pthread_join(monitor, NULL) < 0)
 		return (-1);

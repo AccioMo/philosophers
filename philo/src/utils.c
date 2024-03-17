@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:36:36 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 22:38:05 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/17 01:21:17 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,20 @@ void	ft_usleep(int ms, t_env *env)
 		if (dead)
 			return ;
 	}
+}
+
+int	ft_init(int argc, char *argv[], t_env *env)
+{
+	if (ft_arg_check(argc, argv, env))
+		return (-1);
+	if (ft_allocate(env) < 0)
+		return (-1);
+	if (ft_init_mutexes(env) < 0)
+	{
+		free(env->lock);
+		free(env->forks);
+		free(env->pids);
+		return (-1);
+	}
+	return (0);
 }

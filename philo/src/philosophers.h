@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:10:38 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/16 01:32:25 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/17 01:18:19 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_env
 	int				time_to_die;
 	int				meals_to_go;
 	int				dead;
+	int				full;
 	double			start;
 	pthread_t		*pids;
 	pthread_mutex_t	*forks;
@@ -47,8 +48,8 @@ typedef struct s_philosopher
 
 /*			functions_bonus			*/
 int		ft_arg_check(int argc, char *argv[], t_env *env);
-int		ft_create_watcher(t_philosopher *philo);
 void	ft_clear(t_philosopher *philo);
+int		ft_start(t_env *env);
 
 /*			create_bonus			*/
 int		ft_allocate(t_env *env);
@@ -64,6 +65,7 @@ void	ft_print_action(t_philosopher *philo, char *action);
 void	ft_die(t_philosopher *philo);
 
 /*			utils_bonus				*/
+int		ft_init(int argc, char *argv[], t_env *env);
 double	ft_get_time(void);
 void	ft_usleep(int ms, t_env *env);
 long	ft_round(double nb);

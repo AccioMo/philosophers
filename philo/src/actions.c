@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 21:36:02 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 22:34:12 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/16 23:42:20 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	ft_eat(t_philosopher *philo)
 	pthread_mutex_lock(fork_right);
 	ft_print_action(philo, "has taken a fork");
 	ft_print_action(philo, "is eating");
+	pthread_mutex_lock(philo->env->lock);
 	philo->last_meal = ft_get_time();
+	pthread_mutex_unlock(philo->env->lock);
 	philo->meals++;
 	ft_usleep(philo->env->time_to_eat, philo->env);
 	pthread_mutex_unlock(fork_left);

@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:11:21 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/16 01:26:01 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/17 01:19:30 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ static void	*ft_philosophy(void *arg)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)arg;
+	pthread_mutex_lock(philo->env->lock);
 	philo->last_meal = ft_get_time();
+	pthread_mutex_unlock(philo->env->lock);
 	if (philo->id % 2 == 0 || philo->id == philo->env->pop)
 	{
 		ft_usleep(1 + philo->id / 25, philo->env);
 		ft_think(philo);
 	}
-	while (1)
+	while (ft_breathing(philo))
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
@@ -39,8 +41,8 @@ int	ft_breathing(t_philosopher *philo)
 
 	pthread_mutex_lock(philo->env->lock);
 	dead = philo->env->dead;
-	pthread_mutex_unlock(philo->env->lock);
 	hungry = philo->meals < philo->env->meals_to_go;
+	pthread_mutex_unlock(philo->env->lock);
 	if (dead)
 		pthread_exit(NULL);
 	if (philo->env->meals_to_go < 0 || hungry)
@@ -103,6 +105,5 @@ void	*ft_create_philosophers(t_env *env)
 		}
 		i++;
 	}
-	ft_create_watcher(philo);
 	return (philo);
 }

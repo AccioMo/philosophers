@@ -6,7 +6,7 @@
 /*   By: mzeggaf <mzeggaf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 21:03:15 by mzeggaf           #+#    #+#             */
-/*   Updated: 2024/03/15 23:17:48 by mzeggaf          ###   ########.fr       */
+/*   Updated: 2024/03/17 01:52:32 by mzeggaf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 	ft_arg_check(argc, argv, &env);
 	ft_start(&env);
 	ft_create_philosophers(&env);
-	ft_create_watcher(&env);
+	ft_create_monitor(&env);
 	ft_clear(&env);
 	return (0);
 }
