@@ -2,7 +2,6 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
-LPTHREAD = -lpthread
 
 MAN_DIR = philo/
 NAME = $(MAN_DIR)philo
@@ -29,14 +28,11 @@ BLUE = \033[0;34m
 BOLD = \033[1m
 RESET = \033[0m
 
-.PHONY: all $(LIBFT) $(PRINTF) $(OBJ_DIR) bonus clean fclean re
+.PHONY: all $(LIBFT) $(OBJ_DIR) bonus clean fclean re
 
-all: $(LIBFT) $(PRINTF) $(OBJ_DIR) $(NAME)
+all: $(LIBFT) $(OBJ_DIR) $(NAME)
 
 $(LIBFT): $(LIBFT_DIR)
-	@make -C $<
-
-$(PRINTF): $(PRINTF_DIR)
 	@make -C $<
 
 $(OBJ_DIR):
@@ -44,7 +40,7 @@ $(OBJ_DIR):
 
 $(NAME): $(OBJ)
 	@echo "$(BLUE)$(BOLD)Creating $(NAME) executable...$(RESET)"
-	@$(CC) $(FLAGS) $(OBJ) $(LPTHREAD) $(LIBFT) $(PRINTF) -o $() $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)$(BOLD)$(NAME) created$(RESET)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
@@ -58,7 +54,7 @@ $(BONUS_OBJ_DIR):
 
 $(BONUS): $(BONUS_OBJ)
 	@echo "$(BLUE)$(BOLD)Creating $(BONUS) executable...$(RESET)"
-	@$(CC) $(FLAGS) $(BONUS_OBJ) $(LPTHREAD) $(LIBFT) $(GNL) -o $(BONUS)
+	@$(CC) $(FLAGS) $(BONUS_OBJ) $(LIBFT) $(GNL) -o $(BONUS)
 	@echo "$(GREEN)$(BOLD)$(BONUS) created$(RESET)"
 
 $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c $(BONUS_HEADER) $(GNL_HEADER)
