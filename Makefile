@@ -63,10 +63,12 @@ $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c $(BONUS_HEADER) $(GNL_HEADER)
 
 clean:
 	@rm -f $(OBJ) $(BONUS_OBJ)
+	@make -C $(LIBFT_DIR) clean
 	@echo "$(RED)$(BOLD)Object files removed$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME) $(BONUS)
+	@make -C $(LIBFT_DIR) fclean
 	@echo "$(RED)$(BOLD)$(NAME) and $(BONUS) removed$(RESET)"
 
 re: fclean all

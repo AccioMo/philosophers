@@ -1,0 +1,18 @@
+# Ignore object files and dependency files
+*.o
+*.d
+
+# Ignore executables
+philo/philo
+philo_bonus/philo_bonus
+
+# Ignore build artifacts
+/build
+
+# Ignore editor and OS-specific files
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
